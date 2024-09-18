@@ -6,7 +6,7 @@ using PersonalBlog.Entity.Entities;
 
 namespace PersonalBlog.Web.Areas.Admin.Controllers
 {
-    // [Authorize]
+    
     [Area("Admin")]
     public class AuthController : Controller
     {
@@ -48,6 +48,14 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
             }
 
             return RedirectToAction("Index", "Home", new { Area = "Admin" });
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home", new { Area = "" });
         }
 
     }
