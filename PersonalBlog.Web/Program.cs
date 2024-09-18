@@ -1,12 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PersonalBlog.Data.Context;
+﻿using PersonalBlog.Data;
+using PersonalBlog.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration["ConnectionString:DefaultConnection"]));
-
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+// Register all services for each layer
+builder.Services.LoadDataLayerExtensions(builder.Configuration);
+builder.Services.LoadServiceLayerExtensions();
 
 var app = builder.Build();
 
@@ -14,7 +15,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -25,9 +25,11 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapAreaControllerRoute(
+    name: "Admin",
+    areaName: "Admin",
+    pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
+app.MapDefaultControllerRoute();
 
 app.Run();
 
