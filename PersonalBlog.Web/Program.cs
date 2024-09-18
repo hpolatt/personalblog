@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 using PersonalBlog.Data;
 using PersonalBlog.Data.Context;
 using PersonalBlog.Entity.Entities;
@@ -21,9 +22,10 @@ builder.Services.AddIdentity<AppUser, AppRole>(options =>
     options.Password.RequireLowercase = false;
     options.Password.RequireUppercase = false;
     options.Password.RequireNonAlphanumeric = false;
-}).AddRoleManager<RoleManager<AppRole>>()
-  .AddEntityFrameworkStores<AppDbContext>()
-  .AddDefaultTokenProviders();
+})
+.AddRoleManager<RoleManager<AppRole>>()
+.AddEntityFrameworkStores<AppDbContext>()
+.AddDefaultTokenProviders();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -65,4 +67,3 @@ app.MapAreaControllerRoute(
 app.MapDefaultControllerRoute();
 
 app.Run();
-
