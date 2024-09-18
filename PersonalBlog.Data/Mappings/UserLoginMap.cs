@@ -10,6 +10,7 @@ public class UserLoginMap : IEntityTypeConfiguration<AppUserLogin>
     public void Configure(EntityTypeBuilder<AppUserLogin> builder)
     {
         builder.ToTable("AspNetUserLogins");
+
         builder.HasKey(x => new { x.LoginProvider, x.ProviderKey });
         builder.Property(x => x.LoginProvider).HasMaxLength(128);
         builder.Property(x => x.ProviderKey).HasMaxLength(128);

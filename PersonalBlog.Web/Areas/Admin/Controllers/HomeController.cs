@@ -1,11 +1,12 @@
-using System.Collections;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PersonalBlog.Entity.Entities;
+using PersonalBlog.Entity.DTOs.Articles;
 using PersonalBlog.Service.Services.Abstractions;
 
 namespace PersonalBlog.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IArticleService articleService;
@@ -15,11 +16,11 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
             this.articleService = articleService;
         }
         // GET: HomeController
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            // IList<Article> articles = await articleService.GetAllArticlesAsync();
-            // articles
-            return View();
+            IList<ArticleDto> articles = await articleService.GetAllArticlesAsync();
+            
+            return View(articles);
         }
 
     }

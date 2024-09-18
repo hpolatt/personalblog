@@ -11,6 +11,6 @@ public class Article : EntityBase, IEntityBase
 
     public Category Category { get; set; }
 
-    public Guid ImageId { get; set; }
+    public Guid? ImageId { get; set; }
     public Image Image { get; set; }
 }
