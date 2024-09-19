@@ -1,4 +1,5 @@
 using System;
+using PersonalBlog.Entity.DTOs.Categories;
 
 namespace PersonalBlog.Entity.DTOs.Articles;
 
@@ -11,5 +12,6 @@ public class ArticleUpdateDto
     public string? ModifiedBy { get; set; }
     public virtual DateTime? ModifiedTime { get; set; }
     public virtual bool IsActive { get; set; } = true;
+    public IList<CategoryDto> Categories { get; set; }
 
 }

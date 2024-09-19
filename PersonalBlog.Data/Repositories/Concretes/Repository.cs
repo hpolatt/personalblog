@@ -36,11 +36,11 @@ public class Repository<T> : IRepository<T> where T : class, IEntityBase, new()
         
     }
 
-    public async Task<T> GetAsync(Expression<Func<T, bool>> predicate, Expression<Func<T, object>>[] includeProperties = null)
+    public async Task<T> GetAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
     {
         IQueryable<T> query = Table;
         query = query.Where(predicate);
-        if (includeProperties.Any()) {
+        if (includeProperties != null && includeProperties.Any()) {
             foreach (var includeProperty in includeProperties) {
                 query = query.Include(includeProperty);
             }

@@ -5,5 +5,5 @@ namespace PersonalBlog.Service.Services.Abstractions;
 
 public interface ICategoryService
 {
-    Task<List<CategoryDto>> GetAllCategoriesAsync();
+    Task<List<CategoryDto>> GetAllCategoriesNonDeletedAsync();
 }

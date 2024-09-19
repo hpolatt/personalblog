@@ -13,6 +13,7 @@ public static class ServiceLayerRegistration
         Assembly assembly = Assembly.GetExecutingAssembly();
         
         services.AddScoped<IArticleService, ArticleService>();
+        services.AddScoped<ICategoryService, CategoryService>();
 
         services.AddAutoMapper(assembly);
         return services;

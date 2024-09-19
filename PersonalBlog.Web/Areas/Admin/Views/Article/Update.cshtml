@@ -1,0 +1,40 @@
+@model ArticleUpdateDto
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fx-bold py-3 mb-4">
+        <span class="text-muted fw-light">Article Management/</span>Articles
+    </h4>
+    <div class="row g-6">
+        <div class="col-md-12">
+            <div class="card">
+                <form asp-controller="Article" asp-action="Update" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label asp-for="CategoryId" class="form-label">Category</label>
+                            <select id="categoryList" class="form-control" asp-for="CategoryId"
+                                asp-items="@(new SelectList(Model.Categories, "Id", "Name"))"></select>
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Title" class="form-label">Title</label>
+                            <input asp-for="Title" type="text" class="form-control" placeholder="Title of your article"
+                                aria-describedby="defaultFormControlHelp">
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Content" class="form-label">Content</label>
+                            <textarea asp-for="Content" class="form-control"
+                                placeholder="Please enter the article content" style="min-height: 300px;"
+                                aria-describedby="defaultFormControlHelp"></textarea>
+                            <span asp-validation-for="Content" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

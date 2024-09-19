@@ -19,7 +19,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        IList<ArticleDto> articles =  await articleService.GetAllArticlesAsync();
+        IList<ArticleDto> articles =  await articleService.GetAllArticlesWithCategoryNonDeletedAsync();
         return View(articles);
     }
 

@@ -17,9 +17,9 @@ public class CategoryService : ICategoryService
         this.unitofWork = unitofWork;
         this.mapper = mapper;
     }
-    public async Task<List<CategoryDto>> GetAllCategoriesAsync()
+    public async Task<List<CategoryDto>> GetAllCategoriesNonDeletedAsync()
     {
-        var categories = await unitofWork.GetRepository<Category>().GetAllAsync();
+        var categories = await unitofWork.GetRepository<Category>().GetAllAsync(x => !x.IsDeleted);
         return mapper.Map<List<CategoryDto>>(categories);
     }
 }

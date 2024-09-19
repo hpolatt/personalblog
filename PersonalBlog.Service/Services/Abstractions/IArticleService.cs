@@ -4,5 +4,10 @@ namespace PersonalBlog.Service.Services.Abstractions;
 
 public interface IArticleService
 {
-    Task<List<ArticleDto>> GetAllArticlesAsync();
+    Task<ArticleDto> GetArticleByGuidAsync(Guid articleId);
+    Task<List<ArticleDto>> GetAllArticlesWithCategoryNonDeletedAsync();
+    Task CreateArticleAsync(ArticleAddDto articleAddDto);
+    Task<bool> UpdateArticleAsync(ArticleUpdateDto articleAddDto);
+    Task<bool> SoftDeleteArticleAsync(Guid articleId);
+    
 }
