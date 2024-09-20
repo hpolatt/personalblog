@@ -1,4 +1,5 @@
 using System;
+using Microsoft.AspNetCore.Http;
 using PersonalBlog.Entity.DTOs.Categories;
 
 namespace PersonalBlog.Entity.DTOs.Articles;
@@ -12,4 +13,6 @@ public class ArticleAddDto
     public virtual DateTime? ModifiedTime { get; set; } = DateTime.Now;
     
     public IList<CategoryDto> Categories { get; set; }
+
+    public IFormFile ImageFile { get; set; }
 }

@@ -10,7 +10,7 @@ public class ArticleProfile : Profile
     {
         CreateMap<ArticleAddDto, Article>().ReverseMap();
         CreateMap<ArticleUpdateDto, Article>().ReverseMap();
-         CreateMap<ArticleUpdateDto, ArticleDto>().ReverseMap();
+        CreateMap<ArticleUpdateDto, ArticleDto>().ReverseMap();
         CreateMap<ArticleDto, Article>().ReverseMap();
     }
 }

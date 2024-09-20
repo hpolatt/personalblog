@@ -2,7 +2,7 @@ using System;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace PersonalBlog.Service.Services;
+namespace PersonalBlog.Service.Extensions;
 
 public static class FluentValidationExtension
 {

@@ -1,5 +1,7 @@
 using System;
 using PersonalBlog.Entity.DTOs.Categories;
+using PersonalBlog.Entity.DTOs.Images;
+using PersonalBlog.Entity.Entities;
 
 namespace PersonalBlog.Entity.DTOs.Articles;
 
@@ -12,5 +14,6 @@ public class ArticleDto
     public string CreatedBy { get; set; }
     public virtual DateTime CreatedTime { get; set; }
     public bool IsDeleted { get; set; }
+    public ImageDto image { get; set; }
 }
 

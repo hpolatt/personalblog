@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Http;
 using PersonalBlog.Data;
 using PersonalBlog.Data.Context;
 using PersonalBlog.Entity.Entities;
-using PersonalBlog.Service;
+using PersonalBlog.Service.Extensions;
+using NToastNotify;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,22 @@ builder.Services.LoadServiceLayerExtensions();
 builder.Services.AddSession();
 
 // Add services to the container.
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddControllersWithViews()
+    .AddNToastNotifyToastr(new ToastrOptions(){
+        // ProgressBar = true,
+        PositionClass = ToastPositions.TopRight,
+        ShowDuration = 3000,
+        //  PreventDuplicates = true,
+        // CloseButton = true,
+        // HideDuration = 500,
+        // TimeOut = 5000,
+        // ExtendedTimeOut = 500,
+        // ShowEasing = "swing",
+        // HideEasing = "linear",
+        // ShowMethod = "fadeIn",
+        // HideMethod = "fadeOut"
+    })
+    .AddRazorRuntimeCompilation();
 
 builder.Services.AddIdentity<AppUser, AppRole>(options =>
 {
@@ -48,10 +64,11 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/Home/error");
     app.UseHsts();
 }
 
+app.UseNToastNotify();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseSession();

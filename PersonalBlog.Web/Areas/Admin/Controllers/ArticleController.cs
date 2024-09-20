@@ -1,9 +1,11 @@
 using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using NToastNotify;
 using PersonalBlog.Entity.DTOs.Articles;
 using PersonalBlog.Entity.Entities;
-using PersonalBlog.Service.Services;
+using PersonalBlog.Service.ResultMessages;
+using PersonalBlog.Service.Extensions;
 using PersonalBlog.Service.Services.Abstractions;
 
 namespace PersonalBlog.Web.Areas.Admin.Controllers
@@ -15,13 +17,15 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
         private readonly ICategoryService categoryService;
         private readonly IMapper mapper;
         private readonly IValidator validator;
+        private readonly IToastNotification toastNotification;
 
-        public ArticleController(IArticleService articleService, ICategoryService categoryService, IMapper mapper, IValidator<Article> validator)
+        public ArticleController(IArticleService articleService, ICategoryService categoryService, IMapper mapper, IValidator<Article> validator, IToastNotification toastNotification)
         {
             this.articleService = articleService;
             this.categoryService = categoryService;
             this.mapper = mapper;
             this.validator = validator;
+            this.toastNotification = toastNotification;
         }
         public async Task<ActionResult> Index()
         {
@@ -45,6 +49,7 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
             if (validationResult.IsValid)
             {
                 await articleService.CreateArticleAsync(articleAddDto);
+                toastNotification.AddSuccessToastMessage(Messages.Article.Add(articleAddDto.Title));
                 return RedirectToAction("Index", "Article", new { Area = "Admin" });
             }
             validationResult.AddToModelState(this.ModelState);
@@ -70,6 +75,7 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
             if (validationResult.IsValid)
             {
                 var result = await articleService.UpdateArticleAsync(articleUpdateDto);
+                toastNotification.AddSuccessToastMessage(Messages.Article.Add(articleUpdateDto.Title));
                 if (result == true) return RedirectToAction("Index", "Article", new { Area = "Admin" });
             }
             validationResult.AddToModelState(this.ModelState);
@@ -80,7 +86,8 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
 
         public async Task<ActionResult> Delete(Guid articleId)
         {
-            await articleService.SoftDeleteArticleAsync(articleId);
+            var res = await articleService.SoftDeleteArticleAsync(articleId);
+            if (res is not null) toastNotification.AddSuccessToastMessage(Messages.Article.Delete(res));
             return RedirectToAction("Index", "Article", new { Area = "Admin" });
         }
 

@@ -6,7 +6,7 @@ public class EntityBase : IEntityBase
     public Guid CreatedById { get; set; }
     public Guid? ModifiedById { get; set; }
     public Guid? DeletedById { get; set; }
-    public string CreatedBy { get; set; } = String.Empty;
+    public string CreatedBy { get; set; } = "undefined";
     public string? ModifiedBy { get; set; }
     public string? DeletedBy { get; set; }
     public virtual DateTime CreatedTime { get; set; } = DateTime.Now;
