@@ -14,7 +14,6 @@ public class ArticleService : IArticleService
 {
     public readonly IUnitofWork unitofWork;
     private readonly IMapper mapper;
-    private readonly IHttpContextAccessor httpContextAccessor;
     private readonly IImageHelper imageHelper;
     private readonly ClaimsPrincipal user;
 
@@ -22,7 +21,6 @@ public class ArticleService : IArticleService
     {
         this.unitofWork = unitofWork;
         this.mapper = mapper;
-        this.httpContextAccessor = httpContextAccessor;
         this.imageHelper = imageHelper;
         user = httpContextAccessor.HttpContext.User;
     }

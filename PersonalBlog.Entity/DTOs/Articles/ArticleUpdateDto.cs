@@ -15,7 +15,7 @@ public class ArticleUpdateDto
     public string? ModifiedBy { get; set; }
     public virtual DateTime? ModifiedTime { get; set; }
     public virtual bool IsActive { get; set; } = true;
-    public IList<CategoryDto> Categories { get; set; }
+    public IEnumerable<CategoryDto> Categories { get; set; }
     
     public ImageDto? Image { get; set; }
     public IFormFile? ImageFile { get; set; }

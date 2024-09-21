@@ -31,7 +31,9 @@ public static class ServiceLayerRegistration
         services.AddMvc();
         services.AddFluentValidationAutoValidation();
         services.AddFluentValidationClientsideAdapters();
-        services.AddValidatorsFromAssemblyContaining<ArticleValidator>();
+
+        services.AddValidatorsFromAssemblyContaining(typeof(ArticleValidator));
+
         ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("tr-TR");
 
         return services;

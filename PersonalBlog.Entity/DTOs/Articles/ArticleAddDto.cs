@@ -12,7 +12,7 @@ public class ArticleAddDto
     // public string? ModifiedBy { get; set; }
     public virtual DateTime? ModifiedTime { get; set; } = DateTime.Now;
     
-    public IList<CategoryDto> Categories { get; set; }
+    public IEnumerable<CategoryDto> Categories { get; set; }
 
     public IFormFile ImageFile { get; set; }
 }

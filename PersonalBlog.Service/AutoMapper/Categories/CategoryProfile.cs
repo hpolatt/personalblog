@@ -8,8 +8,10 @@ public class CategoryProfile : Profile
 {
     public CategoryProfile()
     {
-        CreateMap<CategoryAddDto, Category>().ReverseMap();
-        CreateMap<CategoryUpdateDto, Category>().ReverseMap();
-        CreateMap<CategoryDto, Category>().ReverseMap();
+        CreateMap<CategoryAddDto, Category>();
+        CreateMap<CategoryUpdateDto, Category>();
+        CreateMap<Category, CategoryDetailDto>();
+        CreateMap<Category, CategoryDto>();
+
     }
 }

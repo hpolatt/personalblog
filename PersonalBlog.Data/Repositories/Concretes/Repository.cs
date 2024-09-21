@@ -24,6 +24,9 @@ public class Repository<T> : IRepository<T> where T : class, IEntityBase, new()
         entity.CreatedTime = DateTime.Now;
         entity.CreatedById = userId;
         entity.CreatedBy = userEmail;
+        entity.ModifiedTime = DateTime.Now;
+        entity.ModifiedById = userId;
+        entity.ModifiedBy = userEmail;
         await Table.AddAsync(entity);
     }
 
