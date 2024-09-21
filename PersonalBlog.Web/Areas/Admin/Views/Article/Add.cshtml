@@ -9,24 +9,35 @@
             <div class="card">
                 <form asp-controller="Article" asp-action="Add" method="post" enctype="multipart/form-data">
                     <div class="card-body">
-                        <div class="form-group">
-                            <label asp-for="CategoryId" class="form-label">Category</label>
-                            <select id="categoryList" class="form-control" asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))"></select>
-                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        <div class="row form-group mb-3">
+                            <div class="col-md-10">
+                                <label asp-for="CategoryId" class="form-label">Category</label>
+                                <select id="categoryList" class="form-control" asp-for="CategoryId"
+                                    asp-items="@(new SelectList(Model.Categories, "Id", "Name"))"></select>
+                                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                                <a type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModalCenter"><i class="bx bx-plus"></i> Add</a>
+                            </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label asp-for="Title" class="form-label">Title</label>
-                            <input asp-for="Title" type="text" class="form-control" placeholder="Title of your article" aria-describedby="defaultFormControlHelp">
+                            <input asp-for="Title" type="text" class="form-control" placeholder="Title of your article"
+                                aria-describedby="defaultFormControlHelp">
                             <span asp-validation-for="Title" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label asp-for="Content" class="form-label">Content</label>
-                            <textarea asp-for="Content" class="form-control" placeholder="Please enter the article content" style="min-height: 300px;" aria-describedby="defaultFormControlHelp"></textarea>
+                            <textarea asp-for="Content" class="form-control"
+                                placeholder="Please enter the article content" style="min-height: 300px;"
+                                aria-describedby="defaultFormControlHelp"></textarea>
                             <span asp-validation-for="Content" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label asp-for="ImageFile" class="form-label">Content</label>
-                            <input asp-for="ImageFile" class="form-control" type="file" accept="image/*" placeholder="Please select a image" aria-describedby="defaultFormControlHelp">
+                            <input asp-for="ImageFile" class="form-control" type="file" accept="image/*"
+                                placeholder="Please select a image" aria-describedby="defaultFormControlHelp">
                             <span asp-validation-for="ImageFile" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -38,3 +49,43 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form asp-controller="Category" asp-action="Add" method="post">
+            <div class="form-group">
+                <label asp-for="Title" class="form-label">Category Name</label>
+                <input type="text" class="form-control" id="categoryName" focus>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="btnSave">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/addCategory.js"></script>
+    <script>
+        var app = app || {};
+        app.Urls = app.Urls || {};
+
+        app.Urls.baseUrl = '@Url.Content("~")';
+        app.Urls.addCategory = '@Url.Action("AddWithAjax", "Category")';
+        app.Urls.addArticle = '@Url.Action("Add", "Article")';
+
+        
+    </script>
+}
