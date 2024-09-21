@@ -1,0 +1,54 @@
+
+@model IEnumerable<UserDto>
+
+<div class="container-xxl flex-grow-1 container-p-y" style="max-width: 96%;">
+  <h4 class="fx-bold py-3 mb-4">
+    <span class="text-muted fw-light">User Management /</span> Users
+  </h4>
+  <div class="card">
+    <div class="table-responsive text-nowrap m-5">
+      <a class="btn btn-success" asp-area="Admin" asp-controller="User" asp-action="Add">New User
+        <i class="bx bx-plus"></i>
+      </a>
+      <table class="table table-bordered" id="usersTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Email Confirmed</th>
+            <th>Phone Number</th>
+            <th>Access Failed Count</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        @foreach (var user in Model)
+        {
+          <tr>
+            <td>@user.FirstName</td>
+            <td>@user.LastName</td>
+            <td>@user.Email</td>
+            <td>@(user.EmailConfirmed ? "Yes" : "No")</td>
+            <td>@user.PhoneNumber</td>
+            <td>@user.AccessFailedCount</td>
+            <td>@user.Role</td>
+            <td>@(user.IsActive ? "Active" : "Inactive")</td>
+            <td>
+              <a class="btn btn-sm btn-primary" asp-area="Admin" asp-controller="User" asp-action="Update" asp-route-userId="@user.Id"><i class="bx bx-edit"></i></a>
+              <a class="btn btn-sm btn-info" asp-area="Admin" asp-controller="User" asp-action="Info" asp-route-userId="@user.Id"><i class='bx bx-info-circle'></i></a>
+              <a class="btn btn-sm btn-danger" asp-area="Admin" asp-controller="User" asp-action="Delete" asp-route-userId="@user.Id"><i class="bx bx-trash"></i></a>
+            </td>
+          </tr>
+        }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+@section Scripts {
+  <script src="~/js/articleIndex.js" type="application/ecmascript"></script>
+}
