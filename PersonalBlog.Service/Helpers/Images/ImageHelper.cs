@@ -36,10 +36,9 @@ public class ImageHelper : IImageHelper
         }
         return new ImageUploadedDto(Path.Combine(imageFolder, entityFolder, folderName ?? string.Empty, imageNameWithExtension));
     }
-    public Task Delete(string imageName)
+    public void Delete(string imageName)
     {
         var path = Path.Combine(wwwwroot, imageName);
         if (File.Exists(path)) File.Delete(path);
-        return Task.CompletedTask;
     }
 }

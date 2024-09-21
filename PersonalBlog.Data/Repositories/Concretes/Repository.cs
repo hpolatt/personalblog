@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using PersonalBlog.Core.Entities;
 using PersonalBlog.Data.Context;
@@ -18,8 +19,11 @@ public class Repository<T> : IRepository<T> where T : class, IEntityBase, new()
 
     private DbSet<T> Table => dbContext.Set<T>();
 
-    public async Task AddAsync(T entity)
+    public async Task AddAsync(T entity, Guid userId, string userEmail)
     {
+        entity.CreatedTime = DateTime.Now;
+        entity.CreatedById = userId;
+        entity.CreatedBy = userEmail;
         await Table.AddAsync(entity);
     }
 
@@ -27,21 +31,25 @@ public class Repository<T> : IRepository<T> where T : class, IEntityBase, new()
     {
         IQueryable<T> query = Table;
         if (predicate is not null) query = query.Where(predicate);
-        if (includeProperties.Length != 0) {
-            foreach (var includeProperty in includeProperties) {
+        if (includeProperties.Length != 0)
+        {
+            foreach (var includeProperty in includeProperties)
+            {
                 query = query.Include(includeProperty);
             }
         }
         return await query.ToListAsync();
-        
+
     }
 
     public async Task<T> GetAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
     {
         IQueryable<T> query = Table;
         query = query.Where(predicate);
-        if (includeProperties != null && includeProperties.Any()) {
-            foreach (var includeProperty in includeProperties) {
+        if (includeProperties != null && includeProperties.Any())
+        {
+            foreach (var includeProperty in includeProperties)
+            {
                 query = query.Include(includeProperty);
             }
         }
@@ -53,8 +61,11 @@ public class Repository<T> : IRepository<T> where T : class, IEntityBase, new()
         return await Table.FindAsync(id);
     }
 
-    public async Task<T> UpdateAsync(T entity)
+    public async Task<T> UpdateAsync(T entity, Guid userId, string userEmail)
     {
+        entity.ModifiedTime = DateTime.Now;
+        entity.ModifiedById = userId;
+        entity.ModifiedBy = userEmail;
         await Task.Run(() => Table.Update(entity));
         return entity;
     }
@@ -64,11 +75,17 @@ public class Repository<T> : IRepository<T> where T : class, IEntityBase, new()
         await Task.Run(() => Table.Remove(entity));
     }
 
-    public async Task SoftDeleteAsync(T entity)
+    public async Task SoftDeleteAsync(T entity, Guid userId, string userEmail)
     {
         entity.IsDeleted = true;
+        entity.IsActive = false;
+        entity.DeletedTime = DateTime.Now;
+        entity.DeletedById = userId;
+        entity.DeletedBy = userEmail;
+
+
         await Task.Run(() => Table.Update(entity));
-        
+
     }
 
     public Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)

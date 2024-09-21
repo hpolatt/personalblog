@@ -8,5 +8,5 @@ public interface IImageHelper
 {
     Task<ImageUploadedDto> UploadImageAsync(string name, IFormFile imageFile, string entityFolder, string? folderName = null);
 
-    Task Delete(string imageName);
+    void Delete(string imageName);
 }

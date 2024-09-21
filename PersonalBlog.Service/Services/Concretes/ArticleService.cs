@@ -32,11 +32,11 @@ public class ArticleService : IArticleService
 
         var imageUploaded = await imageHelper.UploadImageAsync(articleAddDto.Title, articleAddDto.ImageFile, nameof(Article));
         Image image = new Image(imageUploaded.FileName, articleAddDto.ImageFile.ContentType, user.GetLoggedInUserId(), user.GetLoggedInUserEmail());
-        await unitofWork.GetRepository<Image>().AddAsync(image);
+        await unitofWork.GetRepository<Image>().AddAsync(image, user.GetLoggedInUserId(), user.GetLoggedInUserEmail());
 
         var article = new Article(articleAddDto.Title, articleAddDto.Content, articleAddDto.CategoryId, image.Id, user.GetLoggedInUserId(), user.GetLoggedInUserEmail());
 
-        await unitofWork.GetRepository<Article>().AddAsync(article);
+        await unitofWork.GetRepository<Article>().AddAsync(article, user.GetLoggedInUserId(), user.GetLoggedInUserEmail());
         await unitofWork.SaveChangesAsync();
         return;
     }
@@ -63,20 +63,17 @@ public class ArticleService : IArticleService
 
         if (articleUpdateDto.ImageFile != null)
         {
-            _ = imageHelper.Delete(article.Image.FileName);
-            await unitofWork.GetRepository<Image>().SoftDeleteAsync(article.Image);
+            imageHelper.Delete(article.Image.FileName);
+            await unitofWork.GetRepository<Image>().SoftDeleteAsync(article.Image, user.GetLoggedInUserId(), user.GetLoggedInUserEmail());
+            
             var imageUploaded = await imageHelper.UploadImageAsync(articleUpdateDto.Title, articleUpdateDto.ImageFile, nameof(Article));
             Image image = new Image(imageUploaded.FileName, articleUpdateDto.ImageFile.ContentType, user.GetLoggedInUserId(), user.GetLoggedInUserEmail());
-            await unitofWork.GetRepository<Image>().AddAsync(image);
+            await unitofWork.GetRepository<Image>().AddAsync(image, user.GetLoggedInUserId(), user.GetLoggedInUserEmail());
             article.ImageId = image.Id;
 
         }
 
-        article.ModifiedTime = DateTime.Now;
-        article.ModifiedById = user.GetLoggedInUserId();
-        article.ModifiedBy = user.GetLoggedInUserEmail();
-
-        await unitofWork.GetRepository<Article>().UpdateAsync(article);
+        await unitofWork.GetRepository<Article>().UpdateAsync(article, user.GetLoggedInUserId(), user.GetLoggedInUserEmail());
         await unitofWork.SaveChangesAsync();
 
         return true;
@@ -85,15 +82,10 @@ public class ArticleService : IArticleService
     public async Task<string> SoftDeleteArticleAsync(Guid articleId)
     {
         var article = await unitofWork.GetRepository<Article>().GetByGuidAsync(articleId);
-
-        // fill the deleted fields
-        article.IsDeleted = true;
-        article.IsActive = false;
-        article.DeletedTime = DateTime.Now;
-        article.DeletedById = user.GetLoggedInUserId();
-        article.DeletedBy = user.GetLoggedInUserEmail();
-
-        await unitofWork.GetRepository<Article>().UpdateAsync(article);
+        
+        imageHelper.Delete(article.Image.FileName);
+        await unitofWork.GetRepository<Image>().SoftDeleteAsync(article.Image, user.GetLoggedInUserId(), user.GetLoggedInUserEmail());
+        await unitofWork.GetRepository<Article>().UpdateAsync(article, user.GetLoggedInUserId(), user.GetLoggedInUserEmail());
         await unitofWork.SaveChangesAsync();
         return article.Title;
     }
