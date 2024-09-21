@@ -61,11 +61,11 @@ public class ArticleService : IArticleService
         var article = await unitofWork.GetRepository<Article>().GetAsync(x => !x.IsDeleted && x.Id == articleUpdateDto.Id, x => x.Category);
         mapper.Map(articleUpdateDto, article);
 
-        if (articleUpdateDto.ImageFile != null)
+        if (articleUpdateDto.ImageFile is not null)
         {
             imageHelper.Delete(article.Image.FileName);
             await unitofWork.GetRepository<Image>().SoftDeleteAsync(article.Image, user.GetLoggedInUserId(), user.GetLoggedInUserEmail());
-            
+
             var imageUploaded = await imageHelper.UploadImageAsync(articleUpdateDto.Title, articleUpdateDto.ImageFile, nameof(Article));
             Image image = new Image(imageUploaded.FileName, articleUpdateDto.ImageFile.ContentType, user.GetLoggedInUserId(), user.GetLoggedInUserEmail());
             await unitofWork.GetRepository<Image>().AddAsync(image, user.GetLoggedInUserId(), user.GetLoggedInUserEmail());
@@ -82,9 +82,12 @@ public class ArticleService : IArticleService
     public async Task<string> SoftDeleteArticleAsync(Guid articleId)
     {
         var article = await unitofWork.GetRepository<Article>().GetByGuidAsync(articleId);
-        
-        imageHelper.Delete(article.Image.FileName);
-        await unitofWork.GetRepository<Image>().SoftDeleteAsync(article.Image, user.GetLoggedInUserId(), user.GetLoggedInUserEmail());
+
+        if (article.Image is not null)
+        {
+            imageHelper.Delete(article.Image.FileName);
+            await unitofWork.GetRepository<Image>().SoftDeleteAsync(article.Image, user.GetLoggedInUserId(), user.GetLoggedInUserEmail());
+        }
         await unitofWork.GetRepository<Article>().UpdateAsync(article, user.GetLoggedInUserId(), user.GetLoggedInUserEmail());
         await unitofWork.SaveChangesAsync();
         return article.Title;

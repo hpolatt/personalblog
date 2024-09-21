@@ -1,0 +1,39 @@
+@model ArticleDetailDto
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fx-bold py-3 mb-4">
+        <span class="text-muted fw-light">Article Management/</span>Article Details
+    </h4>
+    <div class="row g-6">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="@(string.IsNullOrEmpty(Model.Image.FileName) ? "col-md-12" : "col-md-6")">
+                            <div class="mb-3">
+                                <label class="form-label">Category</label>
+                                <p class="form-control-plaintext">@Model.Category.Name</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Title</label>
+                                <p class="form-control-plaintext">@Model.Title</p>
+                            </div>
+                        </div>
+                        @if (!string.IsNullOrEmpty(Model?.Image?.FileName))
+                        {
+                            <div class="col-md-6 d-flex align-items-center justify-content-center">
+                                <div class="mb-3">
+                                    <img style="height:220px" src="~/@Model.Image.FileName" alt="@Model.Image.FileName" class="img-fluid" />
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Content</label>
+                        <p class="form-control-plaintext">@Model.Content</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

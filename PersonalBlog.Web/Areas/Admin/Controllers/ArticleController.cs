@@ -90,7 +90,13 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
             if (res is not null) toastNotification.AddSuccessToastMessage(Messages.Article.Delete(res));
             return RedirectToAction("Index", "Article", new { Area = "Admin" });
         }
-
-
+        
+        [HttpGet]
+        public async Task<ActionResult> Info(Guid articleId)
+        {
+            var article = await articleService.GetArticleByGuidAsync(articleId);
+            var articleUpdateDto = mapper.Map<ArticleDetailDto>(article);
+            return View(articleUpdateDto);
+        }
     }
 }
