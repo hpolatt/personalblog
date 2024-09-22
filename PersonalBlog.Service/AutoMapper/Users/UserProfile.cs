@@ -10,6 +10,9 @@ public class UserProfile : Profile
     public UserProfile()
     {
         CreateMap<AppUser, UserDto>();
+        CreateMap<UserAddDto, AppUser>();
+        CreateMap<AppUser, UserUpdateDto>();
+        CreateMap<UserUpdateDto, AppUser>();
     }
 
 }

@@ -1,0 +1,51 @@
+@model UserUpdateDto
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fx-bold py-3 mb-4">
+        <span class="text-muted fw-light">User Management/</span>Users
+    </h4>
+    <div class="row g-6">
+        <div class="col-md-12">
+            <div class="card">
+                <form asp-controller="User" asp-action="Update" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="card-body">
+                        <div class="form-group mb-3">
+                                <label asp-for="RoleId" class="form-label">Role</label>
+                                <select class="form-control" asp-for="RoleId" asp-items="@(new SelectList(Model.Roles, "Id", "Name"))" ></select>
+                            </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Email" class="form-label">Email</label>
+                            <input asp-for="Email" type="email" class="form-control" placeholder="Email" aria-describedby="defaultFormControlHelp">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Password" class="form-label">Password</label>
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Password" aria-describedby="defaultFormControlHelp">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="FirstName" class="form-label">FirstName</label>
+                            <input asp-for="FirstName" class="form-control" placeholder="Please enter your FirstName" aria-describedby="defaultFormControlHelp">
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="LastName" class="form-label">LastName</label>
+                            <input asp-for="LastName" class="form-control" placeholder="Please enter your LastName" aria-describedby="defaultFormControlHelp">
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="PhoneNumber" class="form-label">PhoneNumber</label>
+                            <input asp-for="PhoneNumber" type="tel" class="form-control" placeholder="Please enter your PhoneNumber" aria-describedby="defaultFormControlHelp">
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <button type="submit" class="btn btn-primary btn-block">Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
