@@ -1,9 +1,16 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<ArticleDto>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-
+@foreach (var article in Model)
+{
+    <div class="article">
+        <h2 class="article-title">@article.Title</h2>
+        <div class="article-content">
+            @* <p>@article.</p> *@
+        </div>
+        <div class="article-category">
+            <p>@article.CreatedBy</p>
+            <p>@article.CreatedTime</p>
+        </div>
+        <hr />
+    </div>
+}    

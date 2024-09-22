@@ -1,0 +1,30 @@
+@model CategoryAddDto
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fx-bold py-3 mb-4">
+        <span class="text-muted fw-light">Category Management/</span>Categorys
+    </h4>
+    <div class="row g-6">
+        <div class="col-md-12">
+            <div class="card">
+                <form asp-controller="Category" asp-action="Add" method="post" enctype="multipart/form-data">
+                    <div class="card-body">
+                        <div class="form-group mb-3">
+                            <label asp-for="Name" class="form-label">Name</label>
+                            <input asp-for="Name" type="text" class="form-control" placeholder="Name of your category" aria-describedby="defaultFormControlHelp">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Description" class="form-label">Description</label>
+                            <input asp-for="Description" class="form-control" placeholder="Please enter the category content" aria-describedby="defaultFormControlHelp">
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <button type="submit" class="btn btn-primary btn-block">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+@model CategoryDetailDto
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">
+        <span class="text-muted fw-light">Category Management /</span> Category Details
+    </h4>
+    <div class="row g-6">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Category Name</label>
+                                <p class="form-control-plaintext">@Model.Name</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Description</label>
+                                <p class="form-control-plaintext">@Model.Description</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Created By</label>
+                                <p class="form-control-plaintext">@Model.CreatedBy</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Created Time</label>
+                                <p class="form-control-plaintext">@Model.CreatedTime.ToString("g")</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Modified By</label>
+                                <p class="form-control-plaintext">@Model.ModifiedBy</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Modified Time</label>
+                                <p class="form-control-plaintext">@Model.ModifiedTime?.ToString("g")</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Is Active</label>
+                                <p class="form-control-plaintext">@Model.IsActive</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Articles</label>
+                                <ul class="list-group">
+                                    @foreach (var article in Model.Articles)
+                                    {
+                                        <li class="list-group-item">
+                                            @article.Title
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <a href="@Url.Action("Index", "Category")" class="btn btn-secondary">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
