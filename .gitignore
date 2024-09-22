@@ -405,3 +405,7 @@ ASALocalRun/
 .localhistory/
 
 PersonalBlog.Web/wwwroot/images/*
+
+PersonalBlog.Web/appsettings.Production.json
+PersonalBlog.Web/appsettings.Development.json
+publish.zip

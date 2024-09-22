@@ -265,9 +265,9 @@ namespace PersonalBlog.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("5d10d5f3-9e0b-47c5-b1ea-3551d4f93f9d"), "f0180693-c367-4d20-bdbd-85c1faf3af16", "Admin", "ADMIN" },
-                    { new Guid("904c4ca3-6a70-461b-9739-fb4900e36fcf"), "0b799303-bdfe-479a-ac7c-78d36fa3d365", "Superadmin", "SUPERADMIN" },
-                    { new Guid("e460226b-25f8-4c57-a02b-2fa1de29d80c"), "7659a182-22b3-4b81-b759-e155d0238ef7", "User", "USER" }
+                    { new Guid("5d10d5f3-9e0b-47c5-b1ea-3551d4f93f9d"), "19bca985-802e-4e5c-bc86-3cc36ee8fddf", "Admin", "ADMIN" },
+                    { new Guid("904c4ca3-6a70-461b-9739-fb4900e36fcf"), "bce94284-9945-4386-949e-d1c6f6ce1dae", "Superadmin", "SUPERADMIN" },
+                    { new Guid("e460226b-25f8-4c57-a02b-2fa1de29d80c"), "b6d354d6-ae3b-43f1-8fac-c1595d2d4df7", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -275,8 +275,8 @@ namespace PersonalBlog.Data.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedById", "CreatedTime", "DeletedBy", "DeletedById", "DeletedTime", "Description", "IsActive", "IsDeleted", "ModifiedBy", "ModifiedById", "ModifiedTime", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("1f1e3e0d-1d2b-4b4c-8b8a-5f5f9f5f6f6f"), "admin", new Guid("8df24b15-63fd-4faf-9020-d8ce712a0513"), new DateTime(2024, 9, 18, 17, 17, 43, 132, DateTimeKind.Local).AddTicks(1880), null, null, null, null, true, false, null, null, null, "Software" },
-                    { new Guid("d3b07384-d9a7-4f3b-8f3b-3b7b4b3b7b3b"), "admin", new Guid("75f470f5-85fd-46ae-bac8-1e2045718eb5"), new DateTime(2024, 9, 18, 17, 17, 43, 132, DateTimeKind.Local).AddTicks(1890), null, null, null, null, true, false, null, null, null, "Hardware" }
+                    { new Guid("1f1e3e0d-1d2b-4b4c-8b8a-5f5f9f5f6f6f"), "admin", new Guid("8df24b15-63fd-4faf-9020-d8ce712a0513"), new DateTime(2024, 9, 22, 19, 14, 16, 516, DateTimeKind.Local).AddTicks(340), null, null, null, null, true, false, null, null, null, "Software" },
+                    { new Guid("d3b07384-d9a7-4f3b-8f3b-3b7b4b3b7b3b"), "admin", new Guid("75f470f5-85fd-46ae-bac8-1e2045718eb5"), new DateTime(2024, 9, 22, 19, 14, 16, 516, DateTimeKind.Local).AddTicks(350), null, null, null, null, true, false, null, null, null, "Hardware" }
                 });
 
             migrationBuilder.InsertData(
@@ -284,10 +284,10 @@ namespace PersonalBlog.Data.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedById", "CreatedTime", "DeletedBy", "DeletedById", "DeletedTime", "FileName", "FileType", "IsActive", "IsDeleted", "ModifiedBy", "ModifiedById", "ModifiedTime" },
                 values: new object[,]
                 {
-                    { new Guid("2452dfe7-24e8-4a40-b456-b2b3ed699b3b"), "superadmin", new Guid("8df24b15-63fd-4faf-9020-d8ce712a0513"), new DateTime(2024, 9, 18, 17, 17, 43, 132, DateTimeKind.Local).AddTicks(2520), null, null, null, "SuperAdmin_Profile", "image/jpeg", true, false, null, null, null },
-                    { new Guid("a6b07384-d9a7-4f3b-8f3b-3b7b4b3b7b3b"), "admin", new Guid("75f470f5-85fd-46ae-bac8-1e2045718eb5"), new DateTime(2024, 9, 18, 17, 17, 43, 132, DateTimeKind.Local).AddTicks(2510), null, null, null, "Hardware Image", "image/jpeg", true, false, null, null, null },
-                    { new Guid("b5aa4b7b-431c-46f3-bf7f-cec3b4569b37"), "admin", new Guid("75f470f5-85fd-46ae-bac8-1e2045718eb5"), new DateTime(2024, 9, 18, 17, 17, 43, 132, DateTimeKind.Local).AddTicks(2520), null, null, null, "Admin_Profile", "image/jpeg", true, false, null, null, null },
-                    { new Guid("f5b07384-d9a7-4f3b-8f3b-3b7b4b3b7b3b"), "superadmin", new Guid("8df24b15-63fd-4faf-9020-d8ce712a0513"), new DateTime(2024, 9, 18, 17, 17, 43, 132, DateTimeKind.Local).AddTicks(2500), null, null, null, "Software Image", "image/jpeg", true, false, null, null, null }
+                    { new Guid("2452dfe7-24e8-4a40-b456-b2b3ed699b3b"), "superadmin", new Guid("8df24b15-63fd-4faf-9020-d8ce712a0513"), new DateTime(2024, 9, 22, 19, 14, 16, 516, DateTimeKind.Local).AddTicks(1130), null, null, null, "SuperAdmin_Profile", "image/jpeg", true, false, null, null, null },
+                    { new Guid("a6b07384-d9a7-4f3b-8f3b-3b7b4b3b7b3b"), "admin", new Guid("75f470f5-85fd-46ae-bac8-1e2045718eb5"), new DateTime(2024, 9, 22, 19, 14, 16, 516, DateTimeKind.Local).AddTicks(1120), null, null, null, "Hardware Image", "image/jpeg", true, false, null, null, null },
+                    { new Guid("b5aa4b7b-431c-46f3-bf7f-cec3b4569b37"), "admin", new Guid("75f470f5-85fd-46ae-bac8-1e2045718eb5"), new DateTime(2024, 9, 22, 19, 14, 16, 516, DateTimeKind.Local).AddTicks(1140), null, null, null, "Admin_Profile", "image/jpeg", true, false, null, null, null },
+                    { new Guid("f5b07384-d9a7-4f3b-8f3b-3b7b4b3b7b3b"), "superadmin", new Guid("8df24b15-63fd-4faf-9020-d8ce712a0513"), new DateTime(2024, 9, 22, 19, 14, 16, 516, DateTimeKind.Local).AddTicks(1110), null, null, null, "Software Image", "image/jpeg", true, false, null, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -295,8 +295,8 @@ namespace PersonalBlog.Data.Migrations
                 columns: new[] { "Id", "CategoryId", "Content", "CreatedBy", "CreatedById", "CreatedTime", "DeletedBy", "DeletedById", "DeletedTime", "ImageId", "IsActive", "IsDeleted", "ModifiedBy", "ModifiedById", "ModifiedTime", "Title", "ViewCount" },
                 values: new object[,]
                 {
-                    { new Guid("9c74dd2e-dd40-43d0-8a95-c1c17d7bb465"), new Guid("1f1e3e0d-1d2b-4b4c-8b8a-5f5f9f5f6f6f"), "This is the first article content of the blog site.", "admin", new Guid("8df24b15-63fd-4faf-9020-d8ce712a0513"), new DateTime(2024, 9, 18, 17, 17, 43, 132, DateTimeKind.Local).AddTicks(1180), null, null, null, new Guid("f5b07384-d9a7-4f3b-8f3b-3b7b4b3b7b3b"), true, false, null, null, null, "First Article", 5 },
-                    { new Guid("fe040b5d-ac46-45bf-97fe-839b583a1217"), new Guid("d3b07384-d9a7-4f3b-8f3b-3b7b4b3b7b3b"), "This is the second article content of the blog site.", "admin", new Guid("75f470f5-85fd-46ae-bac8-1e2045718eb5"), new DateTime(2024, 9, 18, 17, 17, 43, 132, DateTimeKind.Local).AddTicks(1190), null, null, null, new Guid("a6b07384-d9a7-4f3b-8f3b-3b7b4b3b7b3b"), true, false, null, null, null, "Second Article", 10 }
+                    { new Guid("e0683799-521d-47df-b2e0-396f4685f4e8"), new Guid("d3b07384-d9a7-4f3b-8f3b-3b7b4b3b7b3b"), "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat consequat dui quis volutpat. Nullam nec pretium neque. Donec eleifend nec leo in blandit. Cras tristique sapien vitae aliquet semper. Aenean sed leo vitae quam ultrices pellentesque sed nec nulla. Nam in nisi ultrices, porta urna nec, facilisis mi. Cras quis felis vitae neque tristique semper vel venenatis libero. Suspendisse lobortis orci ac ullamcorper fringilla. Cras congue mi non semper ultrices. Nunc gravida dui et justo tempus, eu venenatis erat viverra. Nullam sagittis molestie mauris vel rhoncus.", "Admin", new Guid("75f470f5-85fd-46ae-bac8-1e2045718eb5"), new DateTime(2024, 9, 22, 19, 14, 16, 515, DateTimeKind.Local).AddTicks(9410), null, null, null, new Guid("a6b07384-d9a7-4f3b-8f3b-3b7b4b3b7b3b"), true, false, null, null, null, "Second Article", 0 },
+                    { new Guid("ed460622-69bd-4a0d-b293-6b6128f4444f"), new Guid("1f1e3e0d-1d2b-4b4c-8b8a-5f5f9f5f6f6f"), "Pellentesque augue dolor, dapibus at ante at, venenatis pharetra diam. Ut in ipsum at sapien laoreet venenatis ac in ipsum. Vivamus id ligula dapibus, mattis ex eu, egestas ex. Etiam vel metus a felis ornare feugiat. Pellentesque nulla purus, volutpat at velit eget, aliquet vulputate odio. Mauris facilisis ligula massa, ac ullamcorper diam fermentum et. Sed pulvinar nulla sapien, ac finibus sem aliquet eu. Vivamus fermentum at risus eu mattis. Cras vitae rhoncus arcu, eu rhoncus elit. Nulla sem augue, lobortis id luctus ac, placerat quis libero. Sed laoreet lorem quis nulla scelerisque, in rhoncus ligula lobortis. Aliquam auctor lectus enim, et mattis elit iaculis quis. Morbi quam sem, sodales at vestibulum ac, interdum et lectus. Aliquam efficitur est accumsan euismod aliquet. Duis quam enim, pellentesque in pellentesque non, eleifend egestas lacus. Vivamus scelerisque lectus quis magna fermentum pharetra.", "Admin", new Guid("8df24b15-63fd-4faf-9020-d8ce712a0513"), new DateTime(2024, 9, 22, 19, 14, 16, 515, DateTimeKind.Local).AddTicks(9360), null, null, null, new Guid("f5b07384-d9a7-4f3b-8f3b-3b7b4b3b7b3b"), true, false, null, null, null, "First Article", 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -304,8 +304,8 @@ namespace PersonalBlog.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "ImageId", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("75f470f5-85fd-46ae-bac8-1e2045718eb5"), 0, "fa6ae0a6-5a25-4622-ac54-a7a1fd83c55c", "admin@hpolat.com", true, "Huseyin", new Guid("b5aa4b7b-431c-46f3-bf7f-cec3b4569b37"), "Polat", false, null, "ADMIN@HPOLAT.COM", "ADMIN@HPOLAT.COM", "AQAAAAIAAYagAAAAENLz53xHy5xrMUemXT+NMiSX+8oi+7uFz8/jtzqS6e709I9DAkfZAXWMAEJKP6lczg==", "1234567890", true, "e7a33642-f910-40f1-aae5-ba6e02765b6a", false, "admin@hpolat.com" },
-                    { new Guid("8df24b15-63fd-4faf-9020-d8ce712a0513"), 0, "c92bed79-d89f-415e-8479-1b31e36b43b9", "superadmin@hpolat.com", true, "Huseyin", new Guid("2452dfe7-24e8-4a40-b456-b2b3ed699b3b"), "Polat", false, null, "SUPERADMIN@HPOLAT.COM", "SUPERADMIN@HPOLAT.COM", "AQAAAAIAAYagAAAAEG9FGS7iTfe3QD5ktmypszL+WYYXaQEWtPCJuqVrypd+M+xB59BwztUaDP14pHRkuw==", "1234567890", true, "acd73fb1-a29f-41e0-a751-494889ee18ff", false, "superadmin@hpolat.com" }
+                    { new Guid("75f470f5-85fd-46ae-bac8-1e2045718eb5"), 0, "d69807d8-2fab-441b-b4dd-265287e6a37f", "admin@hpolat.com", true, "Huseyin", new Guid("b5aa4b7b-431c-46f3-bf7f-cec3b4569b37"), "Polat", false, null, "ADMIN@HPOLAT.COM", "ADMIN@HPOLAT.COM", "AQAAAAIAAYagAAAAEDF4wx5+jCOosRI4Mf+JMj/6tpmLraJy9llS0Vyyd2QLTHQGfHiMgWr37FQlVAlkPg==", "1234567890", true, "893047a4-1c05-48c2-8421-25ee583dc1d3", false, "admin@hpolat.com" },
+                    { new Guid("8df24b15-63fd-4faf-9020-d8ce712a0513"), 0, "e85b9160-ffa1-4cab-968b-5dbad887de3c", "superadmin@hpolat.com", true, "Huseyin", new Guid("2452dfe7-24e8-4a40-b456-b2b3ed699b3b"), "Polat", false, null, "SUPERADMIN@HPOLAT.COM", "SUPERADMIN@HPOLAT.COM", "AQAAAAIAAYagAAAAEBBTxO21Ja/T+MRENbs1KBVEM6YUY7saLDDFO1X1SF1k680iABvb69aKXWbaLJ864Q==", "1234567890", true, "7c302b67-dcbf-4e1f-8521-c7c23bb0cfee", false, "superadmin@hpolat.com" }
                 });
 
             migrationBuilder.InsertData(

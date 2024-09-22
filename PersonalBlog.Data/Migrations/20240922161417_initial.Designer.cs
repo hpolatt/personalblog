@@ -12,7 +12,7 @@ using PersonalBlog.Data.Context;
 namespace PersonalBlog.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240918141743_initial")]
+    [Migration("20240922161417_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -55,21 +55,21 @@ namespace PersonalBlog.Data.Migrations
                         new
                         {
                             Id = new Guid("904c4ca3-6a70-461b-9739-fb4900e36fcf"),
-                            ConcurrencyStamp = "0b799303-bdfe-479a-ac7c-78d36fa3d365",
+                            ConcurrencyStamp = "bce94284-9945-4386-949e-d1c6f6ce1dae",
                             Name = "Superadmin",
                             NormalizedName = "SUPERADMIN"
                         },
                         new
                         {
                             Id = new Guid("5d10d5f3-9e0b-47c5-b1ea-3551d4f93f9d"),
-                            ConcurrencyStamp = "f0180693-c367-4d20-bdbd-85c1faf3af16",
+                            ConcurrencyStamp = "19bca985-802e-4e5c-bc86-3cc36ee8fddf",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("e460226b-25f8-4c57-a02b-2fa1de29d80c"),
-                            ConcurrencyStamp = "7659a182-22b3-4b81-b759-e155d0238ef7",
+                            ConcurrencyStamp = "b6d354d6-ae3b-43f1-8fac-c1595d2d4df7",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -183,7 +183,7 @@ namespace PersonalBlog.Data.Migrations
                         {
                             Id = new Guid("8df24b15-63fd-4faf-9020-d8ce712a0513"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c92bed79-d89f-415e-8479-1b31e36b43b9",
+                            ConcurrencyStamp = "e85b9160-ffa1-4cab-968b-5dbad887de3c",
                             Email = "superadmin@hpolat.com",
                             EmailConfirmed = true,
                             FirstName = "Huseyin",
@@ -192,10 +192,10 @@ namespace PersonalBlog.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@HPOLAT.COM",
                             NormalizedUserName = "SUPERADMIN@HPOLAT.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEG9FGS7iTfe3QD5ktmypszL+WYYXaQEWtPCJuqVrypd+M+xB59BwztUaDP14pHRkuw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBBTxO21Ja/T+MRENbs1KBVEM6YUY7saLDDFO1X1SF1k680iABvb69aKXWbaLJ864Q==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "acd73fb1-a29f-41e0-a751-494889ee18ff",
+                            SecurityStamp = "7c302b67-dcbf-4e1f-8521-c7c23bb0cfee",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@hpolat.com"
                         },
@@ -203,7 +203,7 @@ namespace PersonalBlog.Data.Migrations
                         {
                             Id = new Guid("75f470f5-85fd-46ae-bac8-1e2045718eb5"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fa6ae0a6-5a25-4622-ac54-a7a1fd83c55c",
+                            ConcurrencyStamp = "d69807d8-2fab-441b-b4dd-265287e6a37f",
                             Email = "admin@hpolat.com",
                             EmailConfirmed = true,
                             FirstName = "Huseyin",
@@ -212,10 +212,10 @@ namespace PersonalBlog.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@HPOLAT.COM",
                             NormalizedUserName = "ADMIN@HPOLAT.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENLz53xHy5xrMUemXT+NMiSX+8oi+7uFz8/jtzqS6e709I9DAkfZAXWMAEJKP6lczg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDF4wx5+jCOosRI4Mf+JMj/6tpmLraJy9llS0Vyyd2QLTHQGfHiMgWr37FQlVAlkPg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "e7a33642-f910-40f1-aae5-ba6e02765b6a",
+                            SecurityStamp = "893047a4-1c05-48c2-8421-25ee583dc1d3",
                             TwoFactorEnabled = false,
                             UserName = "admin@hpolat.com"
                         });
@@ -390,31 +390,31 @@ namespace PersonalBlog.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9c74dd2e-dd40-43d0-8a95-c1c17d7bb465"),
+                            Id = new Guid("ed460622-69bd-4a0d-b293-6b6128f4444f"),
                             CategoryId = new Guid("1f1e3e0d-1d2b-4b4c-8b8a-5f5f9f5f6f6f"),
-                            Content = "This is the first article content of the blog site.",
-                            CreatedBy = "admin",
+                            Content = "Pellentesque augue dolor, dapibus at ante at, venenatis pharetra diam. Ut in ipsum at sapien laoreet venenatis ac in ipsum. Vivamus id ligula dapibus, mattis ex eu, egestas ex. Etiam vel metus a felis ornare feugiat. Pellentesque nulla purus, volutpat at velit eget, aliquet vulputate odio. Mauris facilisis ligula massa, ac ullamcorper diam fermentum et. Sed pulvinar nulla sapien, ac finibus sem aliquet eu. Vivamus fermentum at risus eu mattis. Cras vitae rhoncus arcu, eu rhoncus elit. Nulla sem augue, lobortis id luctus ac, placerat quis libero. Sed laoreet lorem quis nulla scelerisque, in rhoncus ligula lobortis. Aliquam auctor lectus enim, et mattis elit iaculis quis. Morbi quam sem, sodales at vestibulum ac, interdum et lectus. Aliquam efficitur est accumsan euismod aliquet. Duis quam enim, pellentesque in pellentesque non, eleifend egestas lacus. Vivamus scelerisque lectus quis magna fermentum pharetra.",
+                            CreatedBy = "Admin",
                             CreatedById = new Guid("8df24b15-63fd-4faf-9020-d8ce712a0513"),
-                            CreatedTime = new DateTime(2024, 9, 18, 17, 17, 43, 132, DateTimeKind.Local).AddTicks(1180),
+                            CreatedTime = new DateTime(2024, 9, 22, 19, 14, 16, 515, DateTimeKind.Local).AddTicks(9360),
                             ImageId = new Guid("f5b07384-d9a7-4f3b-8f3b-3b7b4b3b7b3b"),
                             IsActive = true,
                             IsDeleted = false,
                             Title = "First Article",
-                            ViewCount = 5
+                            ViewCount = 0
                         },
                         new
                         {
-                            Id = new Guid("fe040b5d-ac46-45bf-97fe-839b583a1217"),
+                            Id = new Guid("e0683799-521d-47df-b2e0-396f4685f4e8"),
                             CategoryId = new Guid("d3b07384-d9a7-4f3b-8f3b-3b7b4b3b7b3b"),
-                            Content = "This is the second article content of the blog site.",
-                            CreatedBy = "admin",
+                            Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi volutpat consequat dui quis volutpat. Nullam nec pretium neque. Donec eleifend nec leo in blandit. Cras tristique sapien vitae aliquet semper. Aenean sed leo vitae quam ultrices pellentesque sed nec nulla. Nam in nisi ultrices, porta urna nec, facilisis mi. Cras quis felis vitae neque tristique semper vel venenatis libero. Suspendisse lobortis orci ac ullamcorper fringilla. Cras congue mi non semper ultrices. Nunc gravida dui et justo tempus, eu venenatis erat viverra. Nullam sagittis molestie mauris vel rhoncus.",
+                            CreatedBy = "Admin",
                             CreatedById = new Guid("75f470f5-85fd-46ae-bac8-1e2045718eb5"),
-                            CreatedTime = new DateTime(2024, 9, 18, 17, 17, 43, 132, DateTimeKind.Local).AddTicks(1190),
+                            CreatedTime = new DateTime(2024, 9, 22, 19, 14, 16, 515, DateTimeKind.Local).AddTicks(9410),
                             ImageId = new Guid("a6b07384-d9a7-4f3b-8f3b-3b7b4b3b7b3b"),
                             IsActive = true,
                             IsDeleted = false,
                             Title = "Second Article",
-                            ViewCount = 10
+                            ViewCount = 0
                         });
                 });
 
@@ -476,7 +476,7 @@ namespace PersonalBlog.Data.Migrations
                             Id = new Guid("1f1e3e0d-1d2b-4b4c-8b8a-5f5f9f5f6f6f"),
                             CreatedBy = "admin",
                             CreatedById = new Guid("8df24b15-63fd-4faf-9020-d8ce712a0513"),
-                            CreatedTime = new DateTime(2024, 9, 18, 17, 17, 43, 132, DateTimeKind.Local).AddTicks(1880),
+                            CreatedTime = new DateTime(2024, 9, 22, 19, 14, 16, 516, DateTimeKind.Local).AddTicks(340),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Software"
@@ -486,7 +486,7 @@ namespace PersonalBlog.Data.Migrations
                             Id = new Guid("d3b07384-d9a7-4f3b-8f3b-3b7b4b3b7b3b"),
                             CreatedBy = "admin",
                             CreatedById = new Guid("75f470f5-85fd-46ae-bac8-1e2045718eb5"),
-                            CreatedTime = new DateTime(2024, 9, 18, 17, 17, 43, 132, DateTimeKind.Local).AddTicks(1890),
+                            CreatedTime = new DateTime(2024, 9, 22, 19, 14, 16, 516, DateTimeKind.Local).AddTicks(350),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Hardware"
@@ -553,7 +553,7 @@ namespace PersonalBlog.Data.Migrations
                             Id = new Guid("f5b07384-d9a7-4f3b-8f3b-3b7b4b3b7b3b"),
                             CreatedBy = "superadmin",
                             CreatedById = new Guid("8df24b15-63fd-4faf-9020-d8ce712a0513"),
-                            CreatedTime = new DateTime(2024, 9, 18, 17, 17, 43, 132, DateTimeKind.Local).AddTicks(2500),
+                            CreatedTime = new DateTime(2024, 9, 22, 19, 14, 16, 516, DateTimeKind.Local).AddTicks(1110),
                             FileName = "Software Image",
                             FileType = "image/jpeg",
                             IsActive = true,
@@ -564,7 +564,7 @@ namespace PersonalBlog.Data.Migrations
                             Id = new Guid("a6b07384-d9a7-4f3b-8f3b-3b7b4b3b7b3b"),
                             CreatedBy = "admin",
                             CreatedById = new Guid("75f470f5-85fd-46ae-bac8-1e2045718eb5"),
-                            CreatedTime = new DateTime(2024, 9, 18, 17, 17, 43, 132, DateTimeKind.Local).AddTicks(2510),
+                            CreatedTime = new DateTime(2024, 9, 22, 19, 14, 16, 516, DateTimeKind.Local).AddTicks(1120),
                             FileName = "Hardware Image",
                             FileType = "image/jpeg",
                             IsActive = true,
@@ -575,7 +575,7 @@ namespace PersonalBlog.Data.Migrations
                             Id = new Guid("2452dfe7-24e8-4a40-b456-b2b3ed699b3b"),
                             CreatedBy = "superadmin",
                             CreatedById = new Guid("8df24b15-63fd-4faf-9020-d8ce712a0513"),
-                            CreatedTime = new DateTime(2024, 9, 18, 17, 17, 43, 132, DateTimeKind.Local).AddTicks(2520),
+                            CreatedTime = new DateTime(2024, 9, 22, 19, 14, 16, 516, DateTimeKind.Local).AddTicks(1130),
                             FileName = "SuperAdmin_Profile",
                             FileType = "image/jpeg",
                             IsActive = true,
@@ -586,7 +586,7 @@ namespace PersonalBlog.Data.Migrations
                             Id = new Guid("b5aa4b7b-431c-46f3-bf7f-cec3b4569b37"),
                             CreatedBy = "admin",
                             CreatedById = new Guid("75f470f5-85fd-46ae-bac8-1e2045718eb5"),
-                            CreatedTime = new DateTime(2024, 9, 18, 17, 17, 43, 132, DateTimeKind.Local).AddTicks(2520),
+                            CreatedTime = new DateTime(2024, 9, 22, 19, 14, 16, 516, DateTimeKind.Local).AddTicks(1140),
                             FileName = "Admin_Profile",
                             FileType = "image/jpeg",
                             IsActive = true,
@@ -671,7 +671,7 @@ namespace PersonalBlog.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("PersonalBlog.Entity.Entities.Image", "Image")
-                        .WithMany("Articles")
+                        .WithMany()
                         .HasForeignKey("ImageId");
 
                     b.Navigation("Category");
@@ -680,11 +680,6 @@ namespace PersonalBlog.Data.Migrations
                 });
 
             modelBuilder.Entity("PersonalBlog.Entity.Entities.Category", b =>
-                {
-                    b.Navigation("Articles");
-                });
-
-            modelBuilder.Entity("PersonalBlog.Entity.Entities.Image", b =>
                 {
                     b.Navigation("Articles");
                 });
