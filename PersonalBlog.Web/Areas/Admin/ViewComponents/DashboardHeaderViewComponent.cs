@@ -10,11 +10,13 @@ namespace PersonalBlog.Web.Areas.Admin.ViewComponents;
 public class DashboardHeaderViewComponent : ViewComponent
 {
     private readonly UserManager<AppUser> userManager;
+    private readonly RoleManager<AppRole> roleManager;
     private readonly IMapper mapper;
 
-    public DashboardHeaderViewComponent(UserManager<AppUser> userManager, IMapper mapper)
+    public DashboardHeaderViewComponent(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, IMapper mapper)
     {
         this.userManager = userManager;
+        this.roleManager = roleManager;
         this.mapper = mapper;
     }
 
@@ -22,6 +24,10 @@ public class DashboardHeaderViewComponent : ViewComponent
     {
         AppUser loggedInUser = await userManager.GetUserAsync(HttpContext.User);
         var userInfo = mapper.Map<UserDto>(loggedInUser);
+
+        userInfo.Role = string.Join("", await userManager.GetRolesAsync(loggedInUser));
+
+
         return View(userInfo);
     }
 }
