@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Experimental.ProjectCache;
@@ -17,6 +18,7 @@ using PersonalBlog.Service.ResultMessages;
 namespace PersonalBlog.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Superadmin")]
     public class UserController : Controller
     {
         private readonly UserManager<AppUser> userManager;
@@ -64,8 +66,10 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
             var roles = await roleManager.Roles.ToListAsync();
             if (ModelState.IsValid)
             {
+                var passwordHasher = new PasswordHasher<AppUser>();
+                map.PasswordHash = passwordHasher.HashPassword(map, userAddDto.Password);
                 map.UserName = userAddDto.Email;
-                var result = await userManager.CreateAsync(map, userAddDto.Password);
+                var result = await userManager.CreateAsync(map);
                 if (result.Succeeded)
                 {
                     var findRole = await roleManager.FindByIdAsync(userAddDto.RoleId.ToString());
@@ -111,6 +115,8 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
             {
                 var user = await userManager.FindByIdAsync(userUpdateDto.Id.ToString());
                 var mappedUser = mapper.Map(userUpdateDto, user);
+                var passwordHasher = new PasswordHasher<AppUser>();
+                mappedUser.PasswordHash = passwordHasher.HashPassword(mappedUser, userUpdateDto.Password);
                 var result = await userManager.UpdateAsync(mappedUser);
                 if (result.Succeeded)
                 {

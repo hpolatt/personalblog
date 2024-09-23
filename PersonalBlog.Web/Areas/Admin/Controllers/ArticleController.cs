@@ -7,6 +7,7 @@ using PersonalBlog.Entity.Entities;
 using PersonalBlog.Service.ResultMessages;
 using PersonalBlog.Service.Extensions;
 using PersonalBlog.Service.Services.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PersonalBlog.Web.Areas.Admin.Controllers
 {
@@ -27,6 +28,7 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
             this.validator = validator;
             this.toastNotification = toastNotification;
         }
+        [Authorize(Roles = "Superadmin, Admin, User")]
         public async Task<ActionResult> Index()
         {
             IList<ArticleDto> articles = await articleService.GetAllArticlesWithCategoryNonDeletedAsync();
@@ -35,6 +37,7 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Superadmin, Admin")]
         public async Task<ActionResult> Add()
         {
             var categories = await categoryService.GetAllCategoriesNonDeletedAsync();
@@ -42,6 +45,7 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Superadmin, Admin")]
         public async Task<ActionResult> Add(ArticleAddDto articleAddDto)
         {
             var article = mapper.Map<Article>(articleAddDto);
@@ -58,6 +62,7 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Superadmin, Admin")]
         public async Task<ActionResult> Update(Guid articleId)
         {
             var article = await articleService.GetArticleByGuidAsync(articleId);
@@ -68,6 +73,7 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Superadmin, Admin")]
         public async Task<ActionResult> Update(ArticleUpdateDto articleUpdateDto)
         {
             var article = mapper.Map<Article>(articleUpdateDto);
@@ -84,6 +90,7 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
 
         }
 
+        [Authorize(Roles = "Superadmin")]
         public async Task<ActionResult> Delete(Guid articleId)
         {
             var res = await articleService.SoftDeleteArticleAsync(articleId);
@@ -92,6 +99,7 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
         }
         
         [HttpGet]
+        [Authorize(Roles = "Superadmin, Admin, User")]
         public async Task<ActionResult> Info(Guid articleId)
         {
             var article = await articleService.GetArticleByGuidAsync(articleId);
