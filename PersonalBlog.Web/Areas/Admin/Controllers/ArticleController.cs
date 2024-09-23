@@ -8,10 +8,11 @@ using PersonalBlog.Service.ResultMessages;
 using PersonalBlog.Service.Extensions;
 using PersonalBlog.Service.Services.Abstractions;
 using Microsoft.AspNetCore.Authorization;
+using PersonalBlog.Web.Const;
 
 namespace PersonalBlog.Web.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("{RoleConts.Admin}")]
     public class ArticleController : Controller
     {
         private readonly IArticleService articleService;
@@ -28,7 +29,7 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
             this.validator = validator;
             this.toastNotification = toastNotification;
         }
-        [Authorize(Roles = "Superadmin, Admin, User")]
+        [Authorize(Roles = $"{RoleConts.Superadmin}, {RoleConts.Admin}, {RoleConts.User}")]
         public async Task<ActionResult> Index()
         {
             IList<ArticleDto> articles = await articleService.GetAllArticlesWithCategoryNonDeletedAsync();
@@ -37,7 +38,7 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Superadmin, Admin")]
+        [Authorize(Roles = $"{RoleConts.Superadmin}, {RoleConts.Admin}")]
         public async Task<ActionResult> Add()
         {
             var categories = await categoryService.GetAllCategoriesNonDeletedAsync();
@@ -45,7 +46,7 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Superadmin, Admin")]
+        [Authorize(Roles = $"{RoleConts.Superadmin}, {RoleConts.Admin}")]
         public async Task<ActionResult> Add(ArticleAddDto articleAddDto)
         {
             var article = mapper.Map<Article>(articleAddDto);
@@ -54,7 +55,7 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
             {
                 await articleService.CreateArticleAsync(articleAddDto);
                 toastNotification.AddSuccessToastMessage(Messages.Article.Add(articleAddDto.Title));
-                return RedirectToAction("Index", "Article", new { Area = "Admin" });
+                return RedirectToAction("Index", "Article", new { Area = "{RoleConts.Admin}" });
             }
             validationResult.AddToModelState(this.ModelState);
             articleAddDto.Categories = await categoryService.GetAllCategoriesNonDeletedAsync();
@@ -62,7 +63,7 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Superadmin, Admin")]
+        [Authorize(Roles = $"{RoleConts.Superadmin}, {RoleConts.Admin}")]
         public async Task<ActionResult> Update(Guid articleId)
         {
             var article = await articleService.GetArticleByGuidAsync(articleId);
@@ -73,7 +74,7 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Superadmin, Admin")]
+        [Authorize(Roles = $"{RoleConts.Superadmin}, {RoleConts.Admin}")]
         public async Task<ActionResult> Update(ArticleUpdateDto articleUpdateDto)
         {
             var article = mapper.Map<Article>(articleUpdateDto);
@@ -82,7 +83,7 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
             {
                 var result = await articleService.UpdateArticleAsync(articleUpdateDto);
                 toastNotification.AddSuccessToastMessage(Messages.Article.Add(articleUpdateDto.Title));
-                if (result == true) return RedirectToAction("Index", "Article", new { Area = "Admin" });
+                if (result == true) return RedirectToAction("Index", "Article", new { Area = "{RoleConts.Admin}" });
             }
             validationResult.AddToModelState(this.ModelState);
             articleUpdateDto.Categories = await categoryService.GetAllCategoriesNonDeletedAsync();
@@ -90,16 +91,16 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
 
         }
 
-        [Authorize(Roles = "Superadmin")]
+        [Authorize(Roles = "{RoleConts.Super{RoleConts.Admin}}")]
         public async Task<ActionResult> Delete(Guid articleId)
         {
             var res = await articleService.SoftDeleteArticleAsync(articleId);
             if (res is not null) toastNotification.AddSuccessToastMessage(Messages.Article.Delete(res));
-            return RedirectToAction("Index", "Article", new { Area = "Admin" });
+            return RedirectToAction("Index", "Article", new { Area = "{RoleConts.Admin}" });
         }
         
         [HttpGet]
-        [Authorize(Roles = "Superadmin, Admin, User")]
+        [Authorize(Roles = $"{RoleConts.Superadmin}, {RoleConts.Admin}, {RoleConts.User}")]
         public async Task<ActionResult> Info(Guid articleId)
         {
             var article = await articleService.GetArticleByGuidAsync(articleId);

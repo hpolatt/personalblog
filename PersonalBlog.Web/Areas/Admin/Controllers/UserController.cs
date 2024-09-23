@@ -1,24 +1,19 @@
-using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using FluentValidation;
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Build.Experimental.ProjectCache;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NToastNotify;
-using PersonalBlog.Data.UnitOfWorks;
 using PersonalBlog.Entity.DTOs.Users;
 using PersonalBlog.Entity.Entities;
-using PersonalBlog.Service.Helpers.Images;
 using PersonalBlog.Service.ResultMessages;
+using PersonalBlog.Web.Const;
 
 namespace PersonalBlog.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Superadmin")]
+    [Authorize(Roles = RoleConts.Superadmin)]
     public class UserController : Controller
     {
         private readonly UserManager<AppUser> userManager;
