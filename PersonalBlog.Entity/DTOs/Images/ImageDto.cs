@@ -1,4 +1,5 @@
 using System;
+using PersonalBlog.Entity.Entities;
 
 namespace PersonalBlog.Entity.DTOs.Images;
 

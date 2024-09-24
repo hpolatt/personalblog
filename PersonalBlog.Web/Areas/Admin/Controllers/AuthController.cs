@@ -58,5 +58,11 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
             return RedirectToAction("Index", "Home", new { Area = "" });
         }
 
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> AccessDenied()
+        {
+            return View();
+        }
     }
 }

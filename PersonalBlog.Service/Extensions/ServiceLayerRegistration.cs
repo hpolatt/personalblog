@@ -21,6 +21,8 @@ public static class ServiceLayerRegistration
         services.AddScoped<IArticleService, ArticleService>();
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<IImageHelper, ImageHelper>();
+        services.AddScoped<IAppUserServie, AppUserService>();
+        services.AddScoped<IDashboardService, DashboardService>();
 
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
