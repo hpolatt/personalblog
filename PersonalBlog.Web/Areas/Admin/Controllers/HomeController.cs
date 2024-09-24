@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using PersonalBlog.Entity.DTOs.Articles;
-using PersonalBlog.Entity.Entities;
+using Newtonsoft.Json;
 using PersonalBlog.Service.Services.Abstractions;
 
 namespace PersonalBlog.Web.Areas.Admin.Controllers
@@ -11,18 +9,25 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        private readonly IArticleService articleService;
+        private readonly IDashboardService dashboardService;
 
-        public HomeController(IArticleService articleService)
+        public HomeController(IDashboardService dashboardService)
         {
-            this.articleService = articleService;
+            this.dashboardService = dashboardService;
         }
         // GET: HomeController
-        public async Task<ActionResult> Index()
+        public async Task<IActionResult> Index()
         {
-            IList<ArticleDto> articles = await articleService.GetAllArticlesWithCategoryNonDeletedAsync();
+            // var data = dashboardService.GetYearlyArticleCount();
             
-            return View(articles);
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> YearlyArticleCount()
+        {
+            var data = await dashboardService.GetYearlyArticleCount();
+            return Json(JsonConvert.SerializeObject(data));
         }
 
     }

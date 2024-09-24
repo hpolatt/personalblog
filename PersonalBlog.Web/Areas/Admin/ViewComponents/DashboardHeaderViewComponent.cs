@@ -4,30 +4,23 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PersonalBlog.Entity.DTOs.Users;
 using PersonalBlog.Entity.Entities;
+using PersonalBlog.Service.Services.Abstractions;
+using PersonalBlog.Service.Services.Concretes;
 
 namespace PersonalBlog.Web.Areas.Admin.ViewComponents;
 
 public class DashboardHeaderViewComponent : ViewComponent
 {
-    private readonly UserManager<AppUser> userManager;
-    private readonly RoleManager<AppRole> roleManager;
-    private readonly IMapper mapper;
+    private readonly IAppUserServie userService;
 
-    public DashboardHeaderViewComponent(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, IMapper mapper)
+    public DashboardHeaderViewComponent(IAppUserServie userService)
     {
-        this.userManager = userManager;
-        this.roleManager = roleManager;
-        this.mapper = mapper;
+        this.userService = userService;
     }
 
     public async Task<IViewComponentResult> InvokeAsync()
     {
-        AppUser loggedInUser = await userManager.GetUserAsync(HttpContext.User);
-        var userInfo = mapper.Map<UserDto>(loggedInUser);
-
-        userInfo.Role = string.Join("", await userManager.GetRolesAsync(loggedInUser));
-
-
+        var userInfo = await userService.GetLoggedInUserDtoByIdAsync();
         return View(userInfo);
     }
 }

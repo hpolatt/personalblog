@@ -5,9 +5,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
+using PersonalBlog.Data.UnitOfWorks;
 using PersonalBlog.Entity.DTOs.Users;
 using PersonalBlog.Entity.Entities;
+using PersonalBlog.Service.Helpers.Images;
 using PersonalBlog.Service.ResultMessages;
+using PersonalBlog.Service.Services.Abstractions;
 using PersonalBlog.Web.Const;
 
 namespace PersonalBlog.Web.Areas.Admin.Controllers
@@ -16,34 +19,21 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
     [Authorize(Roles = RoleConts.Superadmin)]
     public class UserController : Controller
     {
-        private readonly UserManager<AppUser> userManager;
         private readonly RoleManager<AppRole> roleManager;
-        private readonly IMapper mapper;
-        private readonly IValidator<AppUser> validator;
         private readonly IToastNotification toastNotification;
+        private readonly IAppUserServie appUserServie;
 
-
-        public UserController(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, IMapper mapper, IValidator<AppUser> validator, IToastNotification toastNotification)
+        public UserController(RoleManager<AppRole> roleManager, IToastNotification toastNotification, IAppUserServie appUserServie)
         {
-            this.userManager = userManager;
+
             this.roleManager = roleManager;
-            this.mapper = mapper;
-            this.validator = validator;
             this.toastNotification = toastNotification;
+            this.appUserServie = appUserServie;
         }
 
         public async Task<IActionResult> Index()
         {
-            var users = await userManager.Users.ToListAsync();
-            var userDtos = mapper.Map<IEnumerable<UserDto>>(users);
-            mapper.Map<IEnumerable<UserDto>>(users);
-
-            foreach (var item in userDtos)
-            {
-                var user = await userManager.FindByIdAsync(item.Id.ToString());
-                item.Role = string.Join("", await userManager.GetRolesAsync(user));
-            }
-
+            IEnumerable<UserDto> userDtos = await appUserServie.GetAllUsersAsync();
             return View(userDtos);
         }
 
@@ -57,27 +47,18 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(UserAddDto userAddDto)
         {
-            var map = mapper.Map<AppUser>(userAddDto);
-            var roles = await roleManager.Roles.ToListAsync();
-            if (ModelState.IsValid)
+           if (ModelState.IsValid)
             {
-                var passwordHasher = new PasswordHasher<AppUser>();
-                map.PasswordHash = passwordHasher.HashPassword(map, userAddDto.Password);
-                map.UserName = userAddDto.Email;
-                var result = await userManager.CreateAsync(map);
+                var result = await appUserServie.AddUserAsync(userAddDto);
                 if (result.Succeeded)
                 {
-                    var findRole = await roleManager.FindByIdAsync(userAddDto.RoleId.ToString());
-                    if (findRole != null)
-                    {
-                        await userManager.AddToRoleAsync(map, findRole.ToString());
-                    }
                     toastNotification.AddSuccessToastMessage(Messages.User.Add(userAddDto.Email));
                     return RedirectToAction("Index", "User", new { area = "Admin" });
                 }
                 foreach (var errors in result.Errors)
                     ModelState.AddModelError("", errors.Description);
             }
+            var roles = await roleManager.Roles.ToListAsync();
             userAddDto.Roles = roles;
             return View(userAddDto);
         }
@@ -85,21 +66,7 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(Guid userId)
         {
-            var user = await userManager.FindByIdAsync(userId.ToString());
-            var roles = await roleManager.Roles.ToListAsync();
-
-            var userDto = mapper.Map<UserUpdateDto>(user);
-            userDto.Roles = roles;
-            var userRoles = await userManager.GetRolesAsync(user);
-
-            if (userRoles.Any())
-            {
-                var role = await roleManager.FindByNameAsync(userRoles.First());
-                if (role != null)
-                {
-                    userDto.RoleId = role.Id;
-                }
-            }
+            UserUpdateDto userDto = await appUserServie.GetUserUpdateDtoByIdAsync(userId);
             return View(userDto);
         }
 
@@ -108,52 +75,63 @@ namespace PersonalBlog.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await userManager.FindByIdAsync(userUpdateDto.Id.ToString());
-                var mappedUser = mapper.Map(userUpdateDto, user);
-                var passwordHasher = new PasswordHasher<AppUser>();
-                mappedUser.PasswordHash = passwordHasher.HashPassword(mappedUser, userUpdateDto.Password);
-                var result = await userManager.UpdateAsync(mappedUser);
+                var result = await appUserServie.UpdateUserAsync(userUpdateDto);
                 if (result.Succeeded)
                 {
-                    var role = await roleManager.FindByIdAsync(userUpdateDto.RoleId.ToString());
-                    var userRoles = await userManager.GetRolesAsync(mappedUser);
-                    await userManager.RemoveFromRolesAsync(mappedUser, userRoles);
-                    if (role != null)
-                    {
-                        await userManager.AddToRoleAsync(mappedUser, role.ToString());
-                    }
                     toastNotification.AddSuccessToastMessage(Messages.User.Update(userUpdateDto.Email));
                     return RedirectToAction("Index", "User", new { area = "Admin" });
                 }
-                toastNotification.AddErrorToastMessage(result.Errors.First().Description);
             }
             else
-            {
                 foreach (var item in ModelState.Values)
-                {
                     foreach (var error in item.Errors)
-                    {
                         toastNotification.AddErrorToastMessage(error.ErrorMessage);
-                    }
-                }
-            }
-            // validationResult.AddToModelState(this.ModelState);
+            
             userUpdateDto.Roles = await roleManager.Roles.ToListAsync(); ;
             return View(userUpdateDto);
         }
 
         public async Task<IActionResult> Delete(Guid userId)
         {
-            var user = await userManager.FindByIdAsync(userId.ToString());
-            var result = await userManager.DeleteAsync(user);
-            if (result.Succeeded)
-            {
-                toastNotification.AddSuccessToastMessage(Messages.User.Delete(user.Email));
+           var result = await appUserServie.DeleteUserAsync(userId);
+            if (result.identityResult.Succeeded) {
+                toastNotification.AddSuccessToastMessage(Messages.User.Delete(result.email)); 
                 return RedirectToAction("Index", "User", new { area = "Admin" });
             }
-            toastNotification.AddErrorToastMessage(result.Errors.First().Description);
-            return RedirectToAction("Index", "User", new { area = "Admin" });
+            foreach (var error in result.identityResult.Errors)
+                ModelState.AddModelError(string.Empty, error.Description);
+            
+            return NotFound();
+            
+                
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Profile(Guid userId)
+        {
+            var userDto = await appUserServie.GetUserProfileDtoByIdAsync(userId);
+            return View(userDto);
+        }
+
+        [HttpPost]
+          public async Task<IActionResult> Profile(UserProfileDto userProfileDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await appUserServie.UpdateProfileAsync(userProfileDto);
+                if (result.Succeeded)
+                {
+                    toastNotification.AddSuccessToastMessage(Messages.User.Update(userProfileDto.Email));
+                    return RedirectToAction("Index", "User", new { area = "Admin" });
+                }
+                toastNotification.AddErrorToastMessage(result.Errors.First().Description);
+            }
+            else
+                foreach (var item in ModelState.Values)
+                    foreach (var error in item.Errors)
+                        toastNotification.AddErrorToastMessage(error.ErrorMessage);
+                        
+            return View(userProfileDto);
+        }
     }
 }

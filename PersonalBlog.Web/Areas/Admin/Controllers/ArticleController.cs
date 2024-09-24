@@ -12,7 +12,7 @@ using PersonalBlog.Web.Const;
 
 namespace PersonalBlog.Web.Areas.Admin.Controllers
 {
-    [Area("{RoleConts.Admin}")]
+    [Area("Admin")]
     public class ArticleController : Controller
     {
         private readonly IArticleService articleService;
