@@ -23,6 +23,8 @@ public static class ServiceLayerRegistration
         services.AddScoped<IImageHelper, ImageHelper>();
         services.AddScoped<IAppUserServie, AppUserService>();
         services.AddScoped<IDashboardService, DashboardService>();
+        services.AddScoped<IGitHubService, GitHubService>();
+        services.AddHttpClient<IGitHubService, GitHubService>();
 
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

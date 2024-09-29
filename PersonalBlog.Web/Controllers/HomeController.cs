@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using PersonalBlog.Entity.DTOs.Articles;
+using PersonalBlog.Entity.DTOs.GitHub;
 using PersonalBlog.Service.Services.Abstractions;
 using PersonalBlog.Web.Models;
 
@@ -9,18 +10,18 @@ namespace PersonalBlog.Web.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly IArticleService articleService;
+    private readonly IGitHubService gitHubService;
 
-    public HomeController(ILogger<HomeController> logger, IArticleService articleService)
+    public HomeController(ILogger<HomeController> logger, IGitHubService gitHubService)
     {
         _logger = logger;
-        this.articleService = articleService;
+        this.gitHubService = gitHubService;
     }
 
     public async Task<IActionResult> Index()
     {
-        IList<ArticleDto> articles =  await articleService.GetAllArticlesWithCategoryNonDeletedAsync();
-        return View(articles);
+       IEnumerable<GitHubProjectDto> projects = await gitHubService.GetGithubProjects();
+        return View(projects);
     }
 
     public IActionResult Privacy()

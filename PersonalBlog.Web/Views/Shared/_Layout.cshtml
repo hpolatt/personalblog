@@ -1,50 +1,123 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - PersonalBlog.Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/PersonalBlog.Web.styles.css" asp-append-version="true" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hüseyin Polat - CV</title>
+    <link rel="stylesheet" href="~/css/main.css">
+    <link rel="stylesheet" href="~/sneat/assets/vendor/fonts/boxicons.css" />
 </head>
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PersonalBlog.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+        @* <h1>Hüseyin Polat - CV</h1> *@
+        <nav style="display: flex;">
+            <ul>
+                <li><a href="#personal-info">Personal Information</a></li>
+                <li><a href="#tech-stack">Tech Stack</a></li>
+                @* <li><a href="#info">Summary</a></li> *@
+                <li><a href="#github-projects">GitHub Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+            </ul>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/huseyin-polat" target="_blank" class="linkedin">
+                    <i class='bx bxl-linkedin'></i>
+                </a>
+                <a href="https://github.com/hpolatt" target="_blank" class="github">
+                    <i class='bx bxl-github'></i>
+                </a>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - PersonalBlog.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <section id="personal-info">
+        <h2>Personal Information</h2>
+        <p><strong>Full Name:</strong> Hüseyin POLAT</p>
+        <p><strong>Title:</strong> Sr. Software Developer</p>
+        <p><strong>Email:</strong> mr.huseyin.polat@gmail.com</p>
+        <p><strong>Birthdate:</strong> 08.12.1992</p>
+        <p><strong>Driver License:</strong> B</p>
+        <p><strong>Military Service:</strong> Completed</p>
+
+         <h2>Summary</h2>
+        <p>I'm a seasoned Software Engineer with over 8 years of experience in backend development, system integrations,
+            and creating services. Currently, I'm working as a Senior Software Developer at TelescopeLabs, where I
+            specialize in integrating systems and analyzing blockchain data. My expertise includes working with a wide
+            range of programming languages and technologies, particularly in cloud environments like Azure.</p>
+    </section>
+
+
+
+    <section id="tech-stack">
+        <h2>Tech Stack</h2>
+        <ul>
+            <li><strong>Backend:</strong> <i class='bx bx-code'></i> C#, <i class='bx bxl-spring-boot'></i> Java, <i
+                    class='bx bxl-nodejs'></i> NodeJS, <i class='bx bxl-python'></i> Python</li>
+            <li><strong>Framework:</strong> .NET Core, Entity Framework, ASP.NET MVC, ASP.NET Web API, Spring Boot</li>
+            <li><strong>FrontEnd:</strong> <i class='bx bxl-html5'></i> HTML, <i class='bx bxl-javascript'></i>
+                JavaScript, <i class='bx bxl-jquery'></i> jQuery, <i class='bx bxl-css3'></i>CSS</li>
+            <li><strong>Database:</strong> SQL Server, MySQL, KQL(Kusto) Oracle, Cosmos DB, BigQuery, Postgres</li>
+            <li><strong>Service Bus:</strong> Azure Service Bus, RabbitMQ</li>
+            <li><strong>CI/CD:</strong> Azure DevOps, GitHub Actions, Jenkins, Docker</li>
+            <li><strong>Cloud:</strong> Azure</li>
+
+    </section>
+
+
+    <section id="github-projects">
+        <h2>GitHub Projects</h2>
+        @RenderBody()
+
+    </section>
+    <section id="experience">
+        <h2>Experience</h2>
+
+        <div class="experience-item">
+            <h3>Telescope Labs</h3>
+            <p><strong>Sr. Software Developer</strong> (09.2022 - Present)</p>
+            <ul>
+                <li>Backend team member focused on integration and new service creation.</li>
+                <li>Integrated blockchains for data analysis.</li>
+                <li>Integrated third-party data warehouses to enable SQL query execution.</li>
+            </ul>
+            <p><strong>Technologies:</strong> .NET, NodeJS, KQL, SQL, Azure Data Explorer, MySQL, Cosmos DB, BigQuery,
+                Azure Function Apps.</p>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
 
+        <div class="experience-item">
+            <h3>Microsoft</h3>
+            <p><strong>Sr. Software Developer</strong> (02.2022 - 08.2023)</p>
+            <ul>
+                <li>Worked on Python services, HitApp applications, and dashboards using KQL queries.</li>
+            </ul>
+            <p><strong>Technologies:</strong> Python, HTML, CSS, JavaScript, KQL, Azure Machine Learning Studio, Azure
+                Data Explorer, Azure DevOps.</p>
+        </div>
+
+        <div class="experience-item">
+            <h3>Hotech</h3>
+            <p><strong>Software Developer</strong> (06.2016 - 02.2022)</p>
+            <ul>
+                <li>Developed integrations for hotel systems and devices.</li>
+                <li>Android mobile app development for hotels.</li>
+                <li>Managed ERP applications for hotels.</li>
+            </ul>
+            <p><strong>Technologies:</strong> .NET, Delphi, Java, REST, SOAP, TCP, SQL Server, Oracle.</p>
+        </div>
+    </section>
+
+    <section id="education">
+        <h2>Education</h2>
+        <p><strong>University:</strong> Fırat University - Software Engineering</p>
+        <p><strong>High School:</strong> Atatürk Technical and Industrial Vocational School - Network Systems</p>
+    </section>
+
+    <footer style="margin-top: 10px;">
+        &copy; 2024 Hüseyin POLAT
+    </footer>
+</body>
+
+</html>

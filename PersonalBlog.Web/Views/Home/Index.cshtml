@@ -1,16 +1,19 @@
-﻿@model IEnumerable<ArticleDto>
+﻿@model IEnumerable<GitHubProjectDto>
 
-@foreach (var article in Model)
-{
-    <div class="article">
-        <h2 class="article-title">@article.Title</h2>
-        <div class="article-content">
-            @* <p>@article.</p> *@
-        </div>
-        <div class="article-category">
-            <p>@article.CreatedBy</p>
-            <p>@article.CreatedTime</p>
-        </div>
-        <hr />
+<div id="nonforked-repos-container" class="repo-container">
+    <div id="header" class="repo-row header">
+        <div class="repo-cell" style="width: 25%;">Name</div>
+        <div class="repo-cell" style="width: 35%;">Description</div>
+        <div class="repo-cell" style="width: 10%;">Language</div>
+        <div class="repo-cell" style="width: 25%;">Topics</div>
     </div>
-}    
+    @foreach (var repo in Model)
+    {
+        <div class="repo-row">
+            <div class="repo-cell" style="width: 25%;"><a href="@repo.HtmlUrl" target="_blank" class="repo-link">@repo.Name</a></div>
+            <div class="repo-cell" style="width: 35%;">@repo.Description</div>
+            <div class="repo-cell" style="width: 10%;">@repo.Language</div>
+            <div class="repo-cell" style="width: 25%;">@(repo.Topics != null ? string.Join(", ", repo.Topics) : "")</div>
+        </div>
+    }
+</div>
