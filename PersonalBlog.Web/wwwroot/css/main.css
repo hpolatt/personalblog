@@ -250,3 +250,41 @@ nav {
 .social-links i {
     font-size: 24px;
 }
+
+/* Mobil menü için stil */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+}
+
+.menu-toggle i {
+    font-size: 28px;
+    color: #333;
+}
+
+/* Mobil cihazlar için stil */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .social-links {
+        margin-left: 0;
+        justify-content: center;
+        width: 100%;
+    }
+    .display-none {
+        display: none;
+    }
+}

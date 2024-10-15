@@ -4,17 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Huseyin POLAT - Software Engineer | Ex-Microsoft">
+    <meta name="author" content="Huseyin Polat">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hüseyin Polat - CV</title>
+    <title>Hüseyin Polat</title>
     <link rel="stylesheet" href="~/css/main.css">
     <link rel="stylesheet" href="~/sneat/assets/vendor/fonts/boxicons.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
 </head>
 
 <body>
     <header>
         @* <h1>Hüseyin Polat - CV</h1> *@
         <nav style="display: flex;">
-            <ul>
+      
+            <ul class="nav-menu">
                 <li><a href="#personal-info">Personal Information</a></li>
                 <li><a href="#tech-stack">Tech Stack</a></li>
                 @* <li><a href="#info">Summary</a></li> *@
@@ -43,7 +50,7 @@
         <p><strong>Military Service:</strong> Completed</p>
 
          <h2>Summary</h2>
-        <p>I'm a seasoned Software Engineer with over 8 years of experience in backend development, system integrations,
+        <p>I'm a Software Engineer with over 8 years of experience in backend development, system integrations,
             and creating services. Currently, I'm working as a Senior Software Developer at TelescopeLabs, where I
             specialize in integrating systems and analyzing blockchain data. My expertise includes working with a wide
             range of programming languages and technologies, particularly in cloud environments like Azure.</p>
@@ -69,41 +76,59 @@
         @RenderBody()
     </section>
 
-    <section id="experience">
-        <h2>Experience</h2>
+   <section id="experience">
+    <h2>Experience</h2>
 
-        <div class="experience-item">
-            <h3>Telescope Labs</h3>
-            <p><strong>Sr. Software Developer</strong> (09.2022 - Present)</p>
-            <ul>
-                <li>Backend team member focused on integration and new service creation.</li>
-                <li>Integrated blockchains for data analysis.</li>
-                <li>Integrated third-party data warehouses to enable SQL query execution.</li>
+    <div class="experience-item">
+        <h3>Senior Backend Developer</h3>
+        <p><strong>Telescope Labs</strong> (Sept 2022 - Present, London, UK)</p>
+        <ul>
+            <li>I have developed and leaded Blockchain data synchronize;</li>
+            <ul style="list-style: circle; padding-left: 2.5rem; padding-bottom: 0.4rem;">
+                <li>More than 3 Billion Contract base Blockchain data(bsc, eth, solana, polygon, wax, ...) synced</li>
+                <li>More than 300K NFT synced</li>
             </ul>
-            <p><strong>Technologies:</strong> .NET, NodeJS, KQL, SQL, Azure Data Explorer, MySQL, Cosmos DB, BigQuery,
-                Azure Function Apps.</p>
-        </div>
+            <li>Trino(presto) installation, preparing service of triggering the Trino.</li>
+            <li>Working on Custom data model for preparing query for different databases.</li>
+            <ul style="list-style: circle; padding-left: 2.5rem; padding-bottom: 0.4rem;">
+                <li>I have imported several BI tools(Looker, Metabase, PowerBI)</li>
+                <li>I have imported several Databases(SQL Server, Snowflake, BigQuery, Redshift)</li>
+            </ul>
+            <li>Product deploying with Azure DevOPS</li>
+            <li>And requested other services</li>
+        </ul>
+        <p><strong>Technologies:</strong> Azure Service Bus, Azure Function App, Durable Functions, Storage Account, Event Hubs, MySQL, CosmosDB(NoSQL), ADX.</p>
+    </div>
 
-        <div class="experience-item">
-            <h3>Microsoft</h3>
-            <p><strong>Sr. Software Developer</strong> (02.2022 - 08.2023)</p>
-            <ul>
-                <li>Worked on Python services, HitApp applications, and dashboards using KQL queries.</li>
+    <div class="experience-item">
+        <h3>Software Engineer</h3>
+        <p><strong>Microsoft Corporation</strong> (Feb 2022 - Sept 2022, Redmond, WA)</p>
+        <ul>
+            <li>Creating/Maintenance HitApps.</li>
+            <li>Creating/Maintenance Scheduled Python service for Process Judges. Judge process;</li>
+            <ul style="list-style: circle; padding-left: 2.5rem; padding-bottom: 0.4rem;">
+                <li>Uploading Sample data from ADX to HitApp portal</li>
+                <li>After Judging analysis it with ML model and ingesting to ADX.</li>
+                <li>Creating Dashboards for monitoring the judges.</li>
             </ul>
-            <p><strong>Technologies:</strong> Python, HTML, CSS, JavaScript, KQL, Azure Machine Learning Studio, Azure Data Explorer, Azure DevOps.</p>
-        </div>
+        </ul>
+        <p><strong>Technologies:</strong> Azure ML Studio, Azure DevOps, Python Service, Azure Data Explorer(ADX)</p>
+    </div>
 
-        <div class="experience-item">
-            <h3>Hotech</h3>
-            <p><strong>Software Developer</strong> (06.2016 - 02.2022)</p>
-            <ul>
-                <li>Developed integrations for hotel systems and devices.</li>
-                <li>Android mobile app development for hotels.</li>
-                <li>Managed ERP applications for hotels.</li>
+    <div class="experience-item">
+        <h3>Mid. Software Engineer</h3>
+        <p><strong>Hotech</strong> (06.2016 - 02.2022)</p>
+        <ul>
+            <li>Creating/Maintenance Integration System to PMS.</li>
+            <ul style="list-style: circle; padding-left: 2.5rem; padding-bottom: 0.4rem;">
+                <li>Device: Switchboard, Door lock system</li>
+                <li>Data: E-Invoice, Channel Manager, Accounting, Other PMS, ...</li>
             </ul>
-            <p><strong>Technologies:</strong> .NET, Delphi, Java, REST, SOAP, TCP, SQL Server, Oracle.</p>
-        </div>
-    </section>
+            <li>Creating/Maintenance Trigger, Stored Procedure, Index, View, ...</li>
+        </ul>
+        <p><strong>Technologies:</strong> REST, SOAP, TCP, COMM, Firebird(Database), Oracle, SQL Server, PostgreSQL</p>
+    </div>
+</section>
 
     <section id="education">
         <h2>Education</h2>
@@ -120,5 +145,17 @@
     <footer style="margin-top: 10px;">
         &copy; 2024 Hüseyin POLAT
     </footer>
+     <script>
+        // Mobil menü için JavaScript
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.querySelector('.nav-menu');
+        const social = document.querySelector('.social-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            social.classList.toggle('display-none');
+            
+        });
+    </script>
 </body>
 </html>
